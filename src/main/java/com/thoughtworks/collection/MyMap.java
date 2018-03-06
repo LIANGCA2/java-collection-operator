@@ -1,42 +1,114 @@
 package com.thoughtworks.collection;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-import java.util.List;
+import java.util.*;
 
 public class MyMap {
 
-    List<Integer> array;
+    private List<Integer> array;
+
+    private String[] letters = new String[]{"a", "b", "c", "d", "e","f","g","h","i","j","k","l",
+            "m","n","o", "p","q","r","s","t","u","v","w","x","y","z"};
+    private List<String> letterList = Arrays.asList(letters);
 
     public MyMap(List<Integer> array) {
         this.array = array;
     }
 
     public List<Integer> getDouble() {
-        throw new NotImplementedException();
+        List<Integer> doubleList = new ArrayList<>();
+
+        for(int i = 0; i<array.size(); i++){
+            doubleList.add(array.get(i)*2);
+        }
+        return doubleList;
     }
 
     public List<Integer> getTriple() {
-        throw new NotImplementedException();
+        List<Integer> tripleList = new ArrayList<>();
+
+        for(int i = 0; i<array.size(); i++){
+            tripleList.add(array.get(i)*3);
+        }
+        return tripleList;
     }
 
     public List<Integer> getFourFoldThenAddOne() {
-        throw new NotImplementedException();
+
+        List<Integer> fourfoldList = new ArrayList<>();
+
+        for(int i = 0; i<array.size(); i++){
+            fourfoldList.add(array.get(i)*4 + 1);
+        }
+
+        return fourfoldList;
     }
 
     public List<String> mapLetter() {
-        throw new NotImplementedException();
+
+        List<String> result = new ArrayList<>();
+        for(int i=0; i<array.size(); i++){
+            int index = array.get(i) - 1;
+            result.add(letterList.get(index));
+        }
+
+        return result;
     }
 
     public List<String> mapLetters() {
-        throw new NotImplementedException();
+
+        List<String> result = new ArrayList<>();
+        for(int i=0; i<array.size(); i++){
+
+            int currentElement = array.get(i);
+
+            if(currentElement <= 26){
+                result.add(letterList.get(currentElement-1));
+            }else{
+
+                int firstIndex = currentElement/26;
+                int secondIndex = currentElement%26;
+
+                if(secondIndex == 0){
+                    secondIndex = 26;
+                    firstIndex--;
+                }
+
+                String mapLetter = letterList.get(firstIndex-1) + letterList.get(secondIndex-1);
+                result.add(mapLetter);
+            }
+        }
+
+        return result;
     }
 
     public List<Integer> sortFromBig() {
-        throw new NotImplementedException();
+
+        for(int i =0; i<array.size(); i++){
+            for(int j=i+1; j<array.size(); j++){
+
+                if (array.get(i) < array.get(j)){
+                    Integer temp = array.get(i);
+                    array.set(i, array.get(j));
+                    array.set(j, temp);
+                }
+            }
+        }
+
+        return array;
     }
 
     public List<Integer> sortFromSmall() {
-        throw new NotImplementedException();
+        for(int i =0; i<array.size(); i++){
+            for(int j=i+1; j<array.size(); j++){
+
+                if (array.get(i) > array.get(j)){
+                    Integer temp = array.get(i);
+                    array.set(i, array.get(j));
+                    array.set(j, temp);
+                }
+            }
+        }
+
+        return array;
     }
 }

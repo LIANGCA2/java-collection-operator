@@ -109,24 +109,4 @@ public class FilterTest {
 
         assertThat(filter.getUncommonElements(arrayList, arrayList1)).isEqualTo(resultList);
     }
-
-    @Test
-    public void should_filter_elements_by_specify_relationship(){
-
-        Integer[] array = new Integer[] {2,3};
-        List<Integer> arrayList =  Arrays.asList(array);
-
-        Filter filter = new Filter(arrayList);
-
-        Integer[] objectArray = new Integer[]{1,2,3,4,5,6};
-        List<Integer> objectList = Arrays.asList(objectArray);
-
-        Integer[] result = new Integer[]{2,3,4,6};
-        List<Integer> resultList = Arrays.asList(result);
-
-        FilterHandler filterHandler = mock(FilterHandler.class);
-        when(filterHandler.apply(any())).thenReturn(true, true, false, false, true);
-
-        assertThat(filter.getElementsByRelationship(filterHandler, objectList)).isEqualTo(resultList);
-    }
 }

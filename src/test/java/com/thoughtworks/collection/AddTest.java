@@ -37,7 +37,7 @@ public class AddTest {
 
         Add add = new Add();
 
-        assertThat(add.MapMedianToLetter(left, right)).isEqualTo("j");
+        assertThat(add.mapMedianToLetter(left, right)).isEqualTo("j");
     }
 
     @Test
