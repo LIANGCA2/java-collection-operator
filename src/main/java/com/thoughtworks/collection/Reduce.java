@@ -9,17 +9,6 @@ public class Reduce {
     public Reduce(List<Integer> arrayList) {
         this.arrayList = arrayList;
     }
-
-    public int getSum() {
-        int sum = 0;
-
-        for(int i=0; i<arrayList.size(); i++){
-            sum += arrayList.get(i);
-        }
-
-        return sum;
-    }
-
     public int getMaximum() {
         int maximum = arrayList.get(0);
 
@@ -152,9 +141,11 @@ public class Reduce {
     }
 
     public double getAverage() {
-        Reduce reduce = new Reduce(arrayList);
+        int sum = 0;
 
-        double sum = (double) reduce.getSum();
-        return sum/arrayList.size();
+        for(int i=0; i<arrayList.size(); i++){
+            sum += arrayList.get(i);
+        }
+        return (double) sum/arrayList.size();
     }
 }
