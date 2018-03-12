@@ -1,11 +1,8 @@
 .gradle
 build
-gradle
 .idea
 *.iml
 *.ipr
 *.iws
-gradlew
-gradlew.bat
 out
 .DS_Store
