@@ -41,22 +41,6 @@ public class CollectionOperator {
         return result;
     }
 
-    public List<String> getLetterListByInterval(int left, int right) {
-        CollectionOperator collectionOperator = new CollectionOperator();
-        List<Integer> list = collectionOperator.getListByInterval(left, right);
-
-        MyMap myMap = new MyMap(list);
-        return myMap.mapLetter();
-    }
-
-    public List<String> getLoopLetterListByInterval(int left, int right) {
-        CollectionOperator collectionOperator = new CollectionOperator();
-        List<Integer> list = collectionOperator.getListByInterval(left, right);
-
-        MyMap myMap = new MyMap(list);
-        return myMap.mapLetters();
-    }
-
     public List<Integer> popEvenElments(int[] array) {
         List<Integer> result = new ArrayList<>();
 

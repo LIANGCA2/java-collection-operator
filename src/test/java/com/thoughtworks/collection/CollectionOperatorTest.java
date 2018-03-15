@@ -42,31 +42,6 @@ public class CollectionOperatorTest {
     }
 
     @Test
-    public void should_return_letter_list_by__Interval(){
-        int right = 5;
-        int left = 1;
-
-        CollectionOperator collectionOperator = new CollectionOperator();
-
-        String[] result = new String[]{"a", "b", "c", "d", "e"};
-        List<String> resultList = Arrays.asList(result);
-        assertThat(collectionOperator.getLetterListByInterval(left, right)).isEqualTo(resultList);
-    }
-
-    @Test
-    public void should_return_loop_letter_list_by__Interval(){
-        int right = 53;
-        int left = 20;
-
-        CollectionOperator collectionOperator = new CollectionOperator();
-
-        assertThat(collectionOperator.getLoopLetterListByInterval(left, right).size()).isEqualTo(34);
-        assertThat(collectionOperator.getLoopLetterListByInterval(left, right).get(6)).isEqualTo("z");
-        assertThat(collectionOperator.getLoopLetterListByInterval(left, right).get(8)).isEqualTo("ab");
-        assertThat(collectionOperator.getLoopLetterListByInterval(left, right).get(33)).isEqualTo("ba");
-    }
-
-    @Test
     public void should_pop_even_elements(){
         int[] array = new int[]{1,2,3,4,5};
 
