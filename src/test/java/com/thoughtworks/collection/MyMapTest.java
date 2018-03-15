@@ -9,20 +9,6 @@ import static org.fest.assertions.api.Assertions.assertThat;
 public class MyMapTest {
 
     @Test
-    public void should_map_to_double(){
-
-        Integer[] array = new Integer[]{1,2,3,4,5};
-        List<Integer> list = Arrays.asList(array);
-
-        MyMap myMap = new MyMap(list);
-
-        Integer[] result = new Integer[]{2,4,6,8,10};
-        List<Integer> resultList = Arrays.asList(result);
-
-        assertThat(myMap.getDouble()).isEqualTo(resultList);
-    }
-
-    @Test
     public void should_map_to_triple(){
 
         Integer[] array = new Integer[]{1,3,5,4,9};
@@ -34,20 +20,6 @@ public class MyMapTest {
         List<Integer> resultList = Arrays.asList(result);
 
         assertThat(myMap.getTriple()).isEqualTo(resultList);
-    }
-
-    @Test
-    public void should_map_to_fourfold_then_add_1(){
-
-        Integer[] array = new Integer[]{1,2,3,4,5};
-        List<Integer> list = Arrays.asList(array);
-
-        MyMap myMap = new MyMap(list);
-
-        Integer[] result = new Integer[]{5,9,13,17,21};
-        List<Integer> resultList = Arrays.asList(result);
-
-        assertThat(myMap.getFourFoldThenAddOne()).isEqualTo(resultList);
     }
 
     @Test

@@ -14,15 +14,6 @@ public class MyMap {
         this.array = array;
     }
 
-    public List<Integer> getDouble() {
-        List<Integer> doubleList = new ArrayList<>();
-
-        for(int i = 0; i<array.size(); i++){
-            doubleList.add(array.get(i)*2);
-        }
-        return doubleList;
-    }
-
     public List<Integer> getTriple() {
         List<Integer> tripleList = new ArrayList<>();
 
@@ -30,17 +21,6 @@ public class MyMap {
             tripleList.add(array.get(i)*3);
         }
         return tripleList;
-    }
-
-    public List<Integer> getFourFoldThenAddOne() {
-
-        List<Integer> fourfoldList = new ArrayList<>();
-
-        for(int i = 0; i<array.size(); i++){
-            fourfoldList.add(array.get(i)*4 + 1);
-        }
-
-        return fourfoldList;
     }
 
     public List<String> mapLetter() {
