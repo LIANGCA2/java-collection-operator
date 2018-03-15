@@ -48,25 +48,6 @@ public class Reduce {
         return result;
     }
 
-    public double getUnorderedMedian() {
-
-        List<Integer> orderList = arrayList;
-        for(int i=0; i<orderList.size(); i++){
-            for(int j=i; j<orderList.size(); j++){
-
-                if(orderList.get(i) < orderList.get(j)){
-                    int temp = orderList.get(i);
-                    orderList.set(i,orderList.get(j));
-                    orderList.set(j, temp);
-                }
-            }
-
-        }
-
-        Reduce reduce = new Reduce(orderList);
-        return reduce.getOrderedMedian();
-    }
-
     //实现接口SingleLink，然后再此函数内使用
     public double getMedianInLinkList(SingleLink<Integer> singleLink) {
 
