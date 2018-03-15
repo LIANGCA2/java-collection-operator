@@ -4,10 +4,6 @@ import java.util.*;
 
 public class Add {
 
-    private String[] letters = new String[]{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
-            "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
-    private List<String> letterList = Arrays.asList(letters);
-
     private List<Integer> returnEvenIndex(List<Integer> arrayList) {
         List<Integer> result = new ArrayList<>();
         for (int i = 0; i < arrayList.size(); i++) {
@@ -58,22 +54,6 @@ public class Add {
         return sum;
     }
 
-    public String mapMedianToLetter(Integer left, Integer right) {
-        int index;
-        int number = left + right;
-
-        if (number % 2 == 0) {
-            index = number % 2;
-        } else {
-            index = number / 2;
-        }
-
-        if (index % 26 == 0) {
-            return letterList.get(25);
-        }
-        return letterList.get(index % 26 - 1);
-    }
-
     public int getSumTripleAndAddTwo(List<Integer> arrayList) {
         int sum = 0;
         for (Integer anArrayList : arrayList) {
@@ -104,42 +84,6 @@ public class Add {
         }
 
         return sum;
-    }
-
-
-    public List<Object> mapEvenToLetter(List<Integer> arrayList) {
-
-        List<Object> result = new ArrayList<>();
-        for (Integer anArrayList : arrayList) {
-            if (anArrayList % 2 == 0) {
-
-                int index = anArrayList;
-
-                if (index % 26 == 0) {
-                    result.add(letterList.get(25));
-                } else {
-                    result.add(letterList.get(index - 1));
-                }
-            } else {
-                result.add(anArrayList);
-            }
-        }
-        return result;
-    }
-
-    public String mapAverageToLetter(List<Integer> arrayList) {
-        int sum = 0;
-        for (Integer anArrayList : arrayList) {
-            sum += anArrayList;
-        }
-
-        int average = sum / arrayList.size();
-
-        if (average % 26 == 0) {
-            return letterList.get(25);
-        } else {
-            return letterList.get(average - 1);
-        }
     }
 
     public List<Integer> getProcessedList(List<Integer> arrayList) {
@@ -198,50 +142,6 @@ public class Add {
         for (Object anEvenList : evenList) {
             if (!result.contains(anEvenList)) {
                 result.add(anEvenList);
-            }
-        }
-
-        return result;
-    }
-
-    public Map<Integer, Integer> mapEvens(List<Integer> arrayList) {
-        Map map = new HashMap<Integer, Integer>();
-
-        for (Integer anArrayList : arrayList) {
-            String string = "" + anArrayList;
-            if (map.containsKey(string.length())) {
-                map.put(string.length(), string.length() + 1);
-            } else {
-                map.put(string.length(), 1);
-            }
-        }
-
-        return map;
-    }
-
-    public List<Integer> sortByTwoBigOneSmall(List<Integer> arrayList) {
-
-        for (int i = 0; i < arrayList.size(); i++) {
-            for (int j = i; j < arrayList.size(); j++) {
-                if (arrayList.get(i) > arrayList.get(j)) {
-                    Integer temp = arrayList.get(i);
-                    arrayList.set(i, arrayList.get(j));
-                    arrayList.set(j, temp);
-                }
-            }
-        }
-
-        List<Integer> result = new ArrayList<>();
-        for (int i = 0; i < arrayList.size(); i = i + 3) {
-            if (i + 3 <= arrayList.size()) {
-
-                result.add(arrayList.get(i + 1));
-                result.add(arrayList.get(i + 2));
-                result.add(arrayList.get(i));
-            } else {
-                for (int j = i; j < arrayList.size(); j++) {
-                    result.add(arrayList.get(j));
-                }
             }
         }
 

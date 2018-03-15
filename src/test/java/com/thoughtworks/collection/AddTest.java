@@ -31,16 +31,6 @@ public class AddTest {
     }
 
     @Test
-    public void should_map_median_to_letter(){
-        Integer left = 20;
-        Integer right = 53;
-
-        Add add = new Add();
-
-        assertThat(add.mapMedianToLetter(left, right)).isEqualTo("j");
-    }
-
-    @Test
     public void should_get_triple_and_add_two(){
         Integer[] array = new Integer[]{1,5,7,11,35,67};
         List<Integer> arrayList = Arrays.asList(array);
@@ -70,29 +60,6 @@ public class AddTest {
         Add add = new Add();
 
         assertThat(add.getSumOfProcessedOdds(arrayList)).isEqualTo(408);
-    }
-
-    @Test
-    public void should_map_even_to_letter(){
-        Integer[] array = new Integer[]{1,2,3,4,5,6,7,8,9,10};
-        List<Integer> arrayList = Arrays.asList(array);
-
-        Object[] result = new Object[]{1,"b",3,"d",5,"f",7,"h",9,"j"};
-        List<Object> resultObject = Arrays.asList(result);
-
-        Add add = new Add();
-        assertThat(add.mapEvenToLetter(arrayList)).isEqualTo(resultObject);
-    }
-
-    @Test
-    public void should_map_average_to_letter(){
-
-        Integer[] array = new Integer[]{1,2,3,4,5,6,7,8,9,10};
-        List<Integer> arrayList = Arrays.asList(array);
-
-        Add add = new Add();
-
-        assertThat(add.mapAverageToLetter(arrayList)).isEqualTo("e");
     }
 
     @Test
@@ -150,40 +117,6 @@ public class AddTest {
 
         Add add = new Add();
         assertThat(add.getUnrepeatedFromEvenIndex(arrayList)).isEqualTo(resultList);
-    }
-
-    @Test
-    public void should_divide_evens(){
-        Add add = new Add();
-
-        Integer[] array = new Integer[] {1,12,3,24,5,16,7,118,6};
-        List<Integer> arrayList = Arrays.asList(array);
-
-        assertThat(add.mapEvens(arrayList).get(1)).isEqualTo(2);
-        assertThat(add.mapEvens(arrayList).get(2)).isEqualTo(3);
-        assertThat(add.mapEvens(arrayList).get(3)).isEqualTo(1);
-    }
-
-    @Test
-    public void should_sort_by_two_big_followed_one_small(){
-        Add add = new Add();
-
-        Integer[] firstArray = new Integer[] {1,2,3,4,5,6,7,8};
-        List<Integer> firstArrayList = Arrays.asList(firstArray);
-
-        Integer[] firstResult = new Integer[]{2,3,1,5,6,4,7,8};
-        List<Integer> firstResultList = Arrays.asList(firstResult);
-
-        assertThat(add.sortByTwoBigOneSmall(firstArrayList)).isEqualTo(firstResultList);
-
-
-        Integer[] secondArray = new Integer[] {1,2,3,4,5,6,7,8,9};
-        List<Integer> secondArrayList = Arrays.asList(secondArray);
-
-        Integer[] secondResult = new Integer[]{2,3,1,5,6,4,8,9,7};
-        List<Integer> secondResultList = Arrays.asList(secondResult);
-
-        assertThat(add.sortByTwoBigOneSmall(secondArrayList)).isEqualTo(secondResultList);
     }
 
     @Test
