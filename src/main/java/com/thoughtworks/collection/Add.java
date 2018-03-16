@@ -4,10 +4,10 @@ import java.util.*;
 
 public class Add {
 
-    private List<Integer> returnEvenIndex(List<Integer> arrayList) {
+    private List<Integer> returnEvenList(List<Integer> arrayList) {
         List<Integer> result = new ArrayList<>();
         for (int i = 0; i < arrayList.size(); i++) {
-            if (i % 2 == 0) {
+            if (arrayList.get(i) % 2 == 0) {
                 result.add(arrayList.get(i));
             }
         }
@@ -97,7 +97,7 @@ public class Add {
 
     public double getMedianOfEvenIndex(List<Integer> arrayList) {
 
-        List<Integer> resultList = this.returnEvenIndex(arrayList);
+        List<Integer> resultList = this.returnEvenList(arrayList);
 
         int median;
         int size = resultList.size();
@@ -112,7 +112,7 @@ public class Add {
 
     public double getAverageOfEvenIndex(List<Integer> arrayList) {
 
-        List<Integer> result = this.returnEvenIndex(arrayList);
+        List<Integer> result = this.returnEvenList(arrayList);
 
         double sum = 0;
         for (Integer aResult : result) {
@@ -124,7 +124,7 @@ public class Add {
 
     public boolean isIncludedInEvenIndex(List<Integer> arrayList, Integer specialElment) {
 
-        List<Integer> result = this.returnEvenIndex(arrayList);
+        List<Integer> result = this.returnEvenList(arrayList);
 
         for (Integer aResult : result) {
             if (aResult.equals(specialElment)) {
@@ -135,7 +135,7 @@ public class Add {
     }
 
     public List<Integer> getUnrepeatedFromEvenIndex(List<Integer> arrayList) {
-        List evenList = this.returnEvenIndex(arrayList);
+        List evenList = this.returnEvenList(arrayList);
         List result = new ArrayList<>();
 
         result.add(evenList.get(0));

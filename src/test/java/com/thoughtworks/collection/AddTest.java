@@ -101,10 +101,10 @@ public class AddTest {
         Add add = new Add();
 
         Integer existedElment = 3;
-        assertThat(add.isIncludedInEvenIndex(arrayList, existedElment)).isEqualTo(true);
+        assertThat(add.isIncludedInEvenIndex(arrayList, existedElment)).isEqualTo(false);
 
         Integer unexistedElment = 2;
-        assertThat(add.isIncludedInEvenIndex(arrayList, unexistedElment)).isEqualTo(false);
+        assertThat(add.isIncludedInEvenIndex(arrayList, unexistedElment)).isEqualTo(true);
     }
 
     @Test
@@ -112,7 +112,7 @@ public class AddTest {
         Integer[] array = new Integer[] {1,2,3,4,1,5};
         List<Integer> arrayList = Arrays.asList(array);
 
-        Integer[] result = new Integer[]{1,3};
+        Integer[] result = new Integer[]{2,4};
         List<Integer> resultList = Arrays.asList(result);
 
         Add add = new Add();
