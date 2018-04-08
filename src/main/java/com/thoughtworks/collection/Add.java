@@ -95,7 +95,7 @@ public class Add {
         return result;
     }
 
-    public double getMedianOfEvenIndex(List<Integer> arrayList) {
+    public double getMedianOfEven(List<Integer> arrayList) {
 
         List<Integer> resultList = this.returnEvenList(arrayList);
 
@@ -110,7 +110,7 @@ public class Add {
         return median;
     }
 
-    public double getAverageOfEvenIndex(List<Integer> arrayList) {
+    public double getAverageOfEven(List<Integer> arrayList) {
 
         List<Integer> result = this.returnEvenList(arrayList);
 
