@@ -1,6 +1,7 @@
 package com.thoughtworks.collection;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -11,58 +12,39 @@ public class Add {
     }
 
     public int getSumOfEvens(int leftBorder, int rightBorder) {
-        return leftBorder < rightBorder
-                ? getOddSumOfReducedOfTwoNums(leftBorder, rightBorder)
-                : getOddSumOfReducedOfTwoNums(rightBorder, leftBorder);
-    }
-
-    private int getOddSumOfReducedOfTwoNums(int smallNum, int bigNum) {
-        return IntStream.range(smallNum, bigNum + 1)
-                .filter(num -> num % 2 == 0)
-                .reduce((num1, num2) -> num1 + num2)
-                .getAsInt();
+        Function<Integer, Boolean> isContinue = num -> num % 2 == 0;
+        return getSumOfReducedOfTwoNums(leftBorder, rightBorder, isContinue);
     }
 
     public int getSumOfOdds(int leftBorder, int rightBorder) {
 
-        int sum = 0;
+        Function<Integer, Boolean> isContinue = num -> num % 2 != 0;
+        return getSumOfReducedOfTwoNums(leftBorder, rightBorder, isContinue);
+    }
 
-        if (leftBorder < rightBorder) {
-            for (int i = leftBorder; i <= rightBorder; i++) {
-                if (i % 2 != 0) {
-                    sum += i;
-                }
-            }
-        } else {
-            for (int i = leftBorder; i >= rightBorder; i--) {
-                if (i % 2 != 0) {
-                    sum += i;
-                }
-            }
-        }
+    private int getSumOfReducedOfTwoNums(int leftBorder, int rightBorder, Function<Integer, Boolean> isContinue) {
+        return leftBorder < rightBorder
+                ? getEvenSumOfReducedOfTwoNums(leftBorder, rightBorder, isContinue)
+                : getEvenSumOfReducedOfTwoNums(rightBorder, leftBorder, isContinue);
+    }
 
-        return sum;
+    private int getEvenSumOfReducedOfTwoNums(int smallNum, int bigNum, Function<Integer, Boolean> isContinue) {
+        return IntStream.range(smallNum, bigNum + 1)
+                .filter(isContinue::apply)
+                .reduce((num1, num2) -> num1 + num2)
+                .getAsInt();
     }
 
     public int getSumTripleAndAddTwo(List<Integer> arrayList) {
-        int sum = 0;
-        for (Integer anArrayList : arrayList) {
-            sum += (anArrayList * 3 + 2);
-        }
-
-        return sum;
+        return arrayList.stream().mapToInt(num -> num * 3 + 2).sum();
     }
 
     public List<Integer> getTripleOfOddAndAddTwo(List<Integer> arrayList) {
 
-        List result = arrayList;
-        for (int i = 0; i < arrayList.size(); i++) {
-            if (arrayList.get(i) % 2 != 0) {
-                result.set(i, arrayList.get(i) * 3 + 2);
-            }
-        }
-
-        return result;
+        return arrayList.stream()
+                .filter(num -> num % 2 != 0)
+                .map(num -> num * 3 + 2)
+                .collect(Collectors.toList());
     }
 
     public int getSumOfProcessedOdds(List<Integer> arrayList) {
