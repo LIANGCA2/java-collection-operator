@@ -1,36 +1,26 @@
 package com.thoughtworks.collection;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Add {
 
     private List<Integer> returnEvenList(List<Integer> arrayList) {
-        List<Integer> result = new ArrayList<>();
-        for (int i = 0; i < arrayList.size(); i++) {
-            if (arrayList.get(i) % 2 == 0) {
-                result.add(arrayList.get(i));
-            }
-        }
-        return result;
+        return arrayList.stream().filter(num -> num % 2 == 0).collect(Collectors.toList());
     }
 
     public int getSumOfEvens(int leftBorder, int rightBorder) {
-        int sum = 0;
-        if (leftBorder < rightBorder) {
-            for (int i = leftBorder; i <= rightBorder; i++) {
-                if (i % 2 == 0) {
-                    sum += i;
-                }
-            }
-        } else {
-            for (int i = leftBorder; i >= rightBorder; i--) {
-                if (i % 2 == 0) {
-                    sum += i;
-                }
-            }
-        }
+        return leftBorder < rightBorder
+                ? getOddSumOfReducedOfTwoNums(leftBorder, rightBorder)
+                : getOddSumOfReducedOfTwoNums(rightBorder, leftBorder);
+    }
 
-        return sum;
+    private int getOddSumOfReducedOfTwoNums(int smallNum, int bigNum) {
+        return IntStream.range(smallNum, bigNum + 1)
+                .filter(num -> num % 2 == 0)
+                .reduce((num1, num2) -> num1 + num2)
+                .getAsInt();
     }
 
     public int getSumOfOdds(int leftBorder, int rightBorder) {
