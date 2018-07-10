@@ -42,8 +42,7 @@ public class Add {
     public List<Integer> getTripleOfOddAndAddTwo(List<Integer> arrayList) {
 
         return arrayList.stream()
-                .filter(num -> num % 2 != 0)
-                .map(num -> num * 3 + 2)
+                .map(num -> num % 2 != 0 ? num * 3 + 2 : num)
                 .collect(Collectors.toList());
     }
 

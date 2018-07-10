@@ -21,9 +21,9 @@ public class InverseReduce {
 
         IntStream.range(1, number / randomNumber + 1)
                 .reduce(number, (reducedNum, index) -> {
-                    int readucedValue = reducedNum - index;
+                    int readucedValue = reducedNum - randomNumber;
                     result.add(readucedValue);
-                    return randomNumber;
+                    return readucedValue;
                 });
         return result;
 //
