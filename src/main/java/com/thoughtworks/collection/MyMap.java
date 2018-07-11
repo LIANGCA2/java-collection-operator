@@ -1,8 +1,9 @@
 package com.thoughtworks.collection;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class MyMap {
 
@@ -31,11 +32,11 @@ public class MyMap {
             num = num - 1;
             int letterSize = letterList.size();
 
-            String resultStr = "";
+            String resultStr;
             if (num >= letterSize) {
                 int baseLocateNum = num % letterSize;
-                int firstLocateNum = num / (letterSize);
-                resultStr = letterList.get(firstLocateNum - 1) + letterList.get(baseLocateNum);
+                int MultipleLocateNumLocateNum = num / (letterSize) - 1;
+                resultStr = letterList.get(MultipleLocateNumLocateNum) + letterList.get(baseLocateNum);
             } else {
                 resultStr = letterList.get(num);
             }

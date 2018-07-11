@@ -1,6 +1,7 @@
 package com.thoughtworks.collection;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class Reduce {
 
@@ -9,124 +10,64 @@ public class Reduce {
     public Reduce(List<Integer> arrayList) {
         this.arrayList = arrayList;
     }
+
     public int getMaximum() {
-        int maximum = arrayList.get(0);
-
-        for(int i=1; i<arrayList.size(); i++){
-            if(arrayList.get(i) > maximum){
-                maximum = arrayList.get(i);
-            }
-        }
-
-        return maximum;
+        return arrayList.stream().reduce(Integer::max).get();
     }
 
     public double getMinimum() {
-        int mimimum = arrayList.get(0);
-
-        for(int i=1; i<arrayList.size(); i++){
-            if(arrayList.get(i) < mimimum){
-                mimimum = arrayList.get(i);
-            }
-        }
-
-        return mimimum;
+        return arrayList.stream().reduce(Integer::min).get();
     }
 
     public double getOrderedMedian() {
-        double result;
-        int index;
 
-        if(arrayList.size()%2 != 0){
-            index = arrayList.size()/2;
-            result = arrayList.get(index);
-        }else{
-            index = arrayList.size()/2;
-            result = ((double)(arrayList.get(index) + arrayList.get(index-1)))/2;
+        int index = arrayList.size() / 2;
+        if (index % 2 == 0) {
+            return arrayList.stream().skip(index - 1).limit(2).mapToInt(num -> num).average().getAsDouble();
+        } else {
+            return arrayList.stream().skip(index).findFirst().get();
         }
-
-        return result;
     }
 
     //实现接口SingleLink，然后再此函数内使用
     public double getMedianInLinkList(SingleLink<Integer> singleLink) {
 
-        for(int i=0; i<arrayList.size(); i++){
+        int index = arrayList.size() / 2;
 
-            singleLink.addTailPointer(arrayList.get(i));
-        }
-
-        int index = arrayList.size()/2;
-
-        if(arrayList.size()%2 == 0){
-            return (singleLink.getNode(index) + singleLink.getNode(index+1))/2.0;
-        }else{
-            return singleLink.getNode(index+1);
+        if (arrayList.size() % 2 == 0) {
+            return (singleLink.getNode(index) + singleLink.getNode(index + 1)) / 2.0;
+        } else {
+            return singleLink.getNode(index + 1);
         }
     }
 
     public int getFirstEven() {
-
-        for(int i=0; i<arrayList.size(); i++){
-            if(arrayList.get(i)%2 == 0){
-                return arrayList.get(i);
-            }
-        }
-
-        return -1;
+        return arrayList.stream().filter(num -> num % 2 == 0).findFirst().get();
     }
 
     public int getIndexOfFirstEven() {
-        for(int i=0; i<arrayList.size(); i++){
-            if(arrayList.get(i)%2 == 0){
-                return i;
-            }
-        }
-
-        return -1;
+        int firstEvent = arrayList.stream().filter(num -> num % 2 == 0).findFirst().get();
+        return arrayList.indexOf(firstEvent);
     }
 
     public boolean isEqual(List<Integer> objectList) {
-
-        if(objectList.size() != arrayList.size()){
-            return false;
-        }else{
-            for(int i=0; i<arrayList.size(); i++){
-
-                if(arrayList.get(i) != objectList.get(i)){
-                    return false;
-                }
-            }
+        Boolean isEqual = false;
+        if (objectList.size() == arrayList.size()) {
+            isEqual = IntStream.range(0, arrayList.size())
+                    .allMatch(index -> arrayList.get(index) == objectList.get(index));
         }
-
-        return true;
+        return isEqual;
     }
 
     public int getLastOdd() {
-
-        for(int i=arrayList.size()-1; i>=0; i--){
-            if(arrayList.get(i)%2 == 1){
-                return arrayList.get(i);
-            }
-        }
-        return -1;
+        return arrayList.stream().filter(num -> num % 2 != 0).reduce((first, second) -> second).get();
     }
 
     public int getIndexOfLastOdd() {
-        for(int i=arrayList.size()-1; i>=0; i--){
-            if(arrayList.get(i)%2 == 1){
-                return i;
-            }
-        }
-        return -1;
+        return arrayList.lastIndexOf(getLastOdd());
     }
 
     public double getAverage() {
-        int sum = 0;
-
-        for(int i=0; i<arrayList.size(); i++){
-            sum += arrayList.get(i);
-        }
-        return (double) sum/arrayList.size();
+        return arrayList.stream().mapToDouble(num -> num).average().getAsDouble();
     }
 }

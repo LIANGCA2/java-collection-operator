@@ -58,6 +58,7 @@ public class ReduceTest {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     public void should_get_element_in_middle_position_in_linkList_when_even_size(){
         Integer[] array = new Integer[] {1,4,6,2,3,10,9,8,11,2,19,30};
         List<Integer> arrayList = Arrays.asList(array);
@@ -73,6 +74,7 @@ public class ReduceTest {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     public void should_get_element_in_middle_position_in_linkList_when_odd_size(){
         Integer[] array = new Integer[] {1,4,6,2,3,10,9,8,11,2,19};
         List<Integer> arrayList = Arrays.asList(array);
