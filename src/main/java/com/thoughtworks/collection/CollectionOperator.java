@@ -1,98 +1,72 @@
 package com.thoughtworks.collection;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class CollectionOperator {
 
+    private List<Integer> getListOfReducedOfTwoNums(int leftBorder, int rightBorder, Function<Integer, Boolean> isContinue) {
+        return leftBorder < rightBorder
+                ? getListOfReducedBetweenBigAdnsmallNum(leftBorder, rightBorder, isContinue)
+                : getListOfReducedBetweenBigAdnsmallNum(rightBorder, leftBorder, isContinue);
+    }
+
+    private List<Integer> getListOfReducedBetweenBigAdnsmallNum(int smallNum, int bigNum, Function<Integer, Boolean> isContinue) {
+        return IntStream.range(smallNum, bigNum + 1)
+                .filter(isContinue::apply)
+                .boxed()
+                .collect(Collectors.toList());
+    }
+
     public List<Integer> getListByInterval(int left, int right) {
-
-        List<Integer> result = new ArrayList<>();
-
-        if(left < right){
-            for(int i=left; i<= right; i++){
-                result.add(i);
-            }
-        }else{
-            for(int i=left; i>= right; i--){
-                result.add(i);
-            }
-        }
-
-        return result;
+        List<Integer> reducedOfTwoNumsList = this.getListOfReducedOfTwoNums(left, right, num -> true);
+        return left < right
+                ? reducedOfTwoNumsList
+                : reducedOfTwoNumsList.stream()
+                .sorted(Collections.reverseOrder())
+                .collect(Collectors.toList());
     }
 
     public List<Integer> getEvenListByIntervals(int left, int right) {
+        List<Integer> reducedOfTwoNumsList = this.getListOfReducedOfTwoNums(left, right, num -> num % 2 == 0);
+        return left < right
+                ? reducedOfTwoNumsList
+                : reducedOfTwoNumsList.stream()
+                .sorted(Collections.reverseOrder())
+                .collect(Collectors.toList());
 
-        List<Integer> result = new ArrayList<>();
-        if (left < right){
-            for (int i=left; i<=right; i++){
-                if(i%2 == 0){
-                    result.add(i);
-                }
-            }
-        }else{
-            for (int i=left; i>= right; i--){
-                if(i%2 == 0){
-                    result.add(i);
-                }
-            }
-        }
-
-        return result;
     }
 
     public List<Integer> popEvenElments(int[] array) {
-        List<Integer> result = new ArrayList<>();
-
-        for (int i=0; i<array.length; i++){
-            if(array[i]%2 == 0){
-                result.add(array[i]);
-            }
-        }
-
-        return result;
+        return Arrays.stream(array).boxed().filter(num -> num % 2 == 0).collect(Collectors.toList());
     }
 
     public int popLastElment(int[] array) {
-        int index = array.length-1;
+        int index = array.length - 1;
         return array[index];
     }
 
     public List<Integer> popCommonElement(int[] firstArray, int[] secondArray) {
-        List<Integer> result = new ArrayList<>();
 
-        for(int i=0; i<firstArray.length; i++){
-            for(int j=0; j<secondArray.length; j++){
-                if(firstArray[i] == secondArray[j]){
-                    result.add(firstArray[i]);
-                }
-            }
-        }
-
-        return result;
+        return Arrays.stream(firstArray).boxed().filter(numInFirst ->
+                Arrays.stream(secondArray).boxed().anyMatch(numInSecond -> numInSecond.equals(numInFirst)))
+                .collect(Collectors.toList());
     }
 
     public List<Integer> addUncommonElement(Integer[] firstArray, Integer[] secondArray) {
-        ArrayList<Integer> result = new ArrayList<>();
+        List<Integer> unCommonList = Arrays.stream(secondArray).filter(num ->
+                !Arrays.stream(firstArray).anyMatch(numInFirst -> numInFirst.equals(num))
+        ).collect(Collectors.toList());
 
-        for(int i=0; i<firstArray.length; i++){
-            result.add(firstArray[i]);
-        }
+        List<Integer> results = Arrays.stream(firstArray).collect(Collectors.toList());
+        results.addAll(unCommonList);
+        return results;
 
-        for(int i=0; i<secondArray.length; i++){
-            int num =0;
-            for(int j=0; j<firstArray.length; j++){
-
-                if(!secondArray[i].equals(firstArray[j])){
-                    num++;
-                }
-            }
-
-            if(num == firstArray.length){
-                result.add(secondArray[i]);
-            }
-        }
-
-        return result;
     }
 }

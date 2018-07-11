@@ -83,7 +83,7 @@ public class CollectionOperatorTest {
         List<Integer> resultList = Arrays.asList(result);
 
         CollectionOperator collectionOperator = new CollectionOperator();
-        assertThat(collectionOperator.addUncommonElement(firstArray, secondArray).size()).isEqualTo(7);
         assertThat(collectionOperator.addUncommonElement(firstArray, secondArray)).isEqualTo(resultList);
+        assertThat(collectionOperator.addUncommonElement(firstArray, secondArray).size()).isEqualTo(7);
     }
 }
