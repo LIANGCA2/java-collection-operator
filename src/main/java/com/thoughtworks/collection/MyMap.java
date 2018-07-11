@@ -2,6 +2,7 @@ package com.thoughtworks.collection;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class MyMap {
 
@@ -16,74 +17,38 @@ public class MyMap {
     }
 
     public List<Integer> getTriple() {
-        List<Integer> tripleList = new ArrayList<>();
 
-        for (int i = 0; i < array.size(); i++) {
-            tripleList.add(array.get(i) * 3);
-        }
-        return tripleList;
+        return array.stream().map(num -> num * 3).collect(Collectors.toList());
     }
 
-    public List<String> mapLetter() {
-
+    public List<String> lettersmapLetter() {
         return array.stream().map(num -> letterList.get(num - 1)).collect(Collectors.toList());
     }
 
     public List<String> mapLetters() {
 
-        List<String> result = new ArrayList<>();
-        for (int i = 0; i < array.size(); i++) {
+        return array.stream().map(num -> {
+            num = num - 1;
+            int letterSize = letterList.size();
 
-            int currentElement = array.get(i);
-
-            if (currentElement <= 26) {
-                result.add(letterList.get(currentElement - 1));
+            String resultStr = "";
+            if (num >= letterSize) {
+                int baseLocateNum = num % letterSize;
+                int firstLocateNum = num / (letterSize);
+                resultStr = letterList.get(firstLocateNum - 1) + letterList.get(baseLocateNum);
             } else {
-
-                int firstIndex = currentElement / 26;
-                int secondIndex = currentElement % 26;
-
-                if (secondIndex == 0) {
-                    secondIndex = 26;
-                    firstIndex--;
-                }
-
-                String mapLetter = letterList.get(firstIndex - 1) + letterList.get(secondIndex - 1);
-                result.add(mapLetter);
+                resultStr = letterList.get(num);
             }
-        }
+            return resultStr;
 
-        return result;
+        }).collect(Collectors.toList());
     }
 
     public List<Integer> sortFromBig() {
-
-        for (int i = 0; i < array.size(); i++) {
-            for (int j = i + 1; j < array.size(); j++) {
-
-                if (array.get(i) < array.get(j)) {
-                    Integer temp = array.get(i);
-                    array.set(i, array.get(j));
-                    array.set(j, temp);
-                }
-            }
-        }
-
-        return array;
+        return array.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
     }
 
     public List<Integer> sortFromSmall() {
-        for (int i = 0; i < array.size(); i++) {
-            for (int j = i + 1; j < array.size(); j++) {
-
-                if (array.get(i) > array.get(j)) {
-                    Integer temp = array.get(i);
-                    array.set(i, array.get(j));
-                    array.set(j, temp);
-                }
-            }
-        }
-
-        return array;
+        return array.stream().sorted().collect(Collectors.toList());
     }
 }
