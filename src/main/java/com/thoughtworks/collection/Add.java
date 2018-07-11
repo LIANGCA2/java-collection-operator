@@ -47,22 +47,18 @@ public class Add {
     }
 
     public int getSumOfProcessedOdds(List<Integer> arrayList) {
-        int sum = 0;
-        for (int i = 0; i < arrayList.size(); i++) {
-            if (arrayList.get(i) % 2 != 0) {
-                sum += (arrayList.get(i) * 3 + 5);
-            }
-        }
+        return arrayList.stream().filter(num -> num % 2 != 0).mapToInt(num -> num * 3 + 5).sum();
 
-        return sum;
     }
 
     public List<Integer> getProcessedList(List<Integer> arrayList) {
         List<Integer> result = new ArrayList<>();
-        for (int i = 0; i < arrayList.size() - 1; i++) {
-            Integer resultElement = (arrayList.get(i) + arrayList.get(i + 1)) * 3;
-            result.add(resultElement);
-        }
+        arrayList.stream().reduce((num1, num2) -> {
+                    Integer num = (num1 + num2) * 3;
+                    result.add(num);
+                    return num2;
+                }
+        );
         return result;
     }
 
