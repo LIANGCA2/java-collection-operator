@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 public class Add {
 
-    private List<Integer> returnEvenList(List<Integer> arrayList) {
+    private List<Integer> getEvenList(List<Integer> arrayList) {
         return arrayList.stream().filter(num -> num % 2 == 0).collect(Collectors.toList());
     }
 
@@ -64,7 +64,7 @@ public class Add {
 
     public double getMedianOfEven(List<Integer> arrayList) {
 
-        List<Integer> resultList = this.returnEvenList(arrayList);
+        List<Integer> resultList = this.getEvenList(arrayList);
 
         int median;
         int size = resultList.size();
@@ -78,77 +78,39 @@ public class Add {
 
     public double getAverageOfEven(List<Integer> arrayList) {
 
-        List<Integer> result = this.returnEvenList(arrayList);
-        return result.stream().mapToInt(num -> num).sum() / result.size();
+        List<Integer> eventList = this.getEvenList(arrayList);
+        return eventList.stream().mapToInt(num -> num).sum() / eventList.size();
     }
 
     public boolean isIncludedInEvenIndex(List<Integer> arrayList, Integer specialElment) {
 
-        List<Integer> result = this.returnEvenList(arrayList);
-
-        for (Integer aResult : result) {
-            if (aResult.equals(specialElment)) {
-                return true;
-            }
-        }
-        return false;
+        List<Integer> eventList = this.getEvenList(arrayList);
+        return eventList.stream().anyMatch(num -> num.equals(specialElment));
     }
 
     public List<Integer> getUnrepeatedFromEvenIndex(List<Integer> arrayList) {
-        List evenList = this.returnEvenList(arrayList);
-        List result = new ArrayList<>();
+        List<Integer> result = new ArrayList<>();
 
-        result.add(evenList.get(0));
-        for (Object anEvenList : evenList) {
-            if (!result.contains(anEvenList)) {
-                result.add(anEvenList);
+        this.getEvenList(arrayList).forEach(num -> {
+            if (arrayList.stream().filter(filterNum -> filterNum.equals(num)).count() == 1) {
+                result.add(num);
             }
-        }
+        });
 
         return result;
     }
 
     public List<Integer> sortByEvenAndOdd(List<Integer> arrayList) {
-        List<Integer> evenList = new ArrayList<>();
-        List<Integer> oddList = new ArrayList<>();
 
-        for (Integer anArrayList : arrayList) {
-            if (anArrayList % 2 != 0) {
-                oddList.add(anArrayList);
-            }
-        }
+        List<Integer> evenList = this.getEvenList(arrayList).stream()
+                .sorted()
+                .collect(Collectors.toList());
+        List<Integer> oddList = arrayList.stream()
+                .filter(num -> num % 2 != 0)
+                .sorted((num1, num2) -> num2 - num1)
+                .collect(Collectors.toList());
 
-        for (Integer anArrayList : arrayList) {
-            if (anArrayList % 2 == 0) {
-                evenList.add(anArrayList);
-            }
-        }
-
-        for (int i = 0; i < evenList.size(); i++) {
-            for (int j = 0; j < evenList.size(); j++) {
-                if (evenList.get(i) < evenList.get(j)) {
-                    int temp = evenList.get(i);
-                    evenList.set(i, evenList.get(j));
-                    evenList.set(j, temp);
-                }
-            }
-        }
-
-        for (int i = 0; i < oddList.size(); i++) {
-            for (int j = 0; j < oddList.size(); j++) {
-                if (oddList.get(i) > oddList.get(j)) {
-                    int temp = oddList.get(i);
-                    oddList.set(i, oddList.get(j));
-                    oddList.set(j, temp);
-                }
-            }
-        }
-
-        List<Integer> result = evenList;
-        for (Integer anOddList : oddList) {
-            result.add(anOddList);
-        }
-
-        return result;
+        evenList.addAll(oddList);
+        return evenList;
     }
 }
