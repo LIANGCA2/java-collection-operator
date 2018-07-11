@@ -73,20 +73,13 @@ public class Add {
         } else {
             median = resultList.get(size / 2);
         }
-
         return median;
     }
 
     public double getAverageOfEven(List<Integer> arrayList) {
 
         List<Integer> result = this.returnEvenList(arrayList);
-
-        double sum = 0;
-        for (Integer aResult : result) {
-            sum += aResult;
-        }
-
-        return sum / result.size();
+        return result.stream().mapToInt(num -> num).sum() / result.size();
     }
 
     public boolean isIncludedInEvenIndex(List<Integer> arrayList, Integer specialElment) {
